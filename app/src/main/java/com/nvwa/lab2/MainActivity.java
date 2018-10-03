@@ -1,15 +1,20 @@
 package com.nvwa.lab2;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setButtonsClickListener();
+        setSpinnerItemSelectedListener();
     }
 
     @Override
@@ -55,35 +61,71 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void myClickHandler(View view) {
-        TextView qq = findViewById(R.id.text);
-        switch (view.getId() ) {
+    public void myClickHandler( View view ) {
+        TextView qq = findViewById( R.id.qq );
+        switch ( view.getId() ) {
             case R.id.redBtn:
-                qq.setTextColor(Color.RED);
+                qq.setTextColor( Color.RED );
                 break;
             case R.id.greenBtn:
-                qq.setTextColor(Color.GREEN);
+                qq.setTextColor( Color.GREEN );
                 break;
             case R.id.blueBtn:
-                qq.setTextColor(Color.BLUE);
+                qq.setTextColor( Color.BLUE );
                 break;
             default:
         }
     }
 
     public void setButtonsClickListener() {
-        Button redBtn = findViewById( R.id.redBtn );
+        Button redBtn   = findViewById( R.id.redBtn );
         Button greenBtn = findViewById( R.id.greenBtn );
-        Button blueBtn = findViewById( R.id.blueBtn );
+        Button blueBtn  = findViewById( R.id.blueBtn );
 
         View.OnClickListener myClickListener = new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick( View view ) {
                 myClickHandler(view);
             }
         };
-        redBtn.setOnClickListener(myClickListener);
-        greenBtn.setOnClickListener(myClickListener);
-        blueBtn.setOnClickListener(myClickListener);
+        if ( redBtn != null )
+            redBtn.setOnClickListener( myClickListener );
+        if ( greenBtn != null )
+            greenBtn.setOnClickListener( myClickListener );
+        if ( blueBtn != null )
+            blueBtn.setOnClickListener( myClickListener );
+    }
+    public void setSpinnerItemSelectedListener() {
+        Spinner spinner = findViewById( R.id.spinner );
+        if ( spinner != null ) {
+            spinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected( AdapterView<?> parent, View view, int position, long id ) {
+                    ImageView logoView = findViewById( R.id.img );
+                    if( logoView != null ) {
+                        Drawable dr;
+                        switch( position ) {
+                            case 0:
+                                dr = ResourcesCompat.getDrawable( getResources(),R.drawable.pp_logo,null );
+                                break;
+                            case 1:
+                                dr = ResourcesCompat.getDrawable( getResources(),R.drawable.et_logo,null );
+                                break;
+                            case 2:
+                                dr = ResourcesCompat.getDrawable( getResources(),R.drawable.kr_logo,null );
+                                break;
+                            default:
+                                dr = ResourcesCompat.getDrawable( getResources(),R.drawable.et_logo,null );
+                        }
+                        logoView.setImageDrawable(dr);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected( AdapterView<?> parent ) {
+
+                }
+            } );
+        }
     }
 }

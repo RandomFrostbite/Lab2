@@ -5,4 +5,9 @@
     <string name="greenBtn">green</string>
     <string name="blueBtn">blue</string>
     <string name="action_settings">Settings</string>
+    <string-array name="myImageArray">
+        <item>image 1</item>
+        <item>image 2</item>
+        <item>image 3</item>
+    </string-array>
 </resources>
