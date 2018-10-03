@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Lab2</string>
+    <string name="qq">Hello World!</string>
+    <string name="redBtn">red</string>
+    <string name="greenBtn">green</string>
+    <string name="blueBtn">blue</string>
     <string name="action_settings">Settings</string>
 </resources>
